@@ -1,0 +1,15 @@
+# Pywikibot のユーザー設定サンプル。
+# このファイルを user-config.py という名前でコピーし、値を書き換えて使う。
+# user-config.py は .gitignore 済みなのでコミットされない。
+
+family = 'wikipedia'   # 対象ファミリー
+mylang = 'ja'          # 対象言語（日本語版）
+
+# Bot 専用アカウント名（通常利用のアカウントとは分けること）
+usernames['wikipedia']['ja'] = 'YourBotName'
+
+# BotPasswords の保存先
+password_file = "user-password.py"
+
+# Pywikibot 自身の編集スロットル（秒）。本 Bot 本体の間隔制御と併用する
+put_throttle = 10

@@ -1,0 +1,19 @@
+# 認証情報（絶対にコミットしない）
+user-config.py
+user-password.py
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Pywikibot の作業ファイル
+*.log
+.lwp/
+pywikibot/
+apicache/
+throttle.ctrl
+
+# 対象ページ一覧などの作業メモ
+pages.txt
