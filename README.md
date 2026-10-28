@@ -94,6 +94,14 @@ python -m bot.run_replace --old "旧表記" --new "新表記" --pages-file pages
 
 各ページについて「置換が何件起きるか」と差分を表示するだけです。
 
+リンク修正（種別C）のときは `--link` を付けると、内部リンクのリンク先だけを置き換えます（`[[旧名]]`、`[[旧名|表示名]]`、`[[旧名#節]]` が対象で、表示名・本文は変えません）。
+
+```bash
+python -m bot.run_replace --old "旧名" --new "新名" --pages-file pages.txt --link
+```
+
+作業方針は [docs/task-plan.md](docs/task-plan.md)、使用申請の下書きは [docs/bot-application-draft.md](docs/bot-application-draft.md) を見てください。
+
 ### 3. 実際に書く（承認と仮運用の範囲でのみ）
 
 ```bash

@@ -21,7 +21,7 @@ import argparse
 import sys
 import time
 
-from bot.text_replace import apply_replace, make_preview
+from bot.text_replace import apply_replace, make_preview, replace_link_target
 
 # 日本語版 Wikipedia の方針に合わせた下限・上限（docs/bot-approval-ja.md 参照）
 UNAPPROVED_MIN_INTERVAL_SEC = 60
@@ -75,6 +75,8 @@ def main() -> int:
         "--interval", type=float, default=60.0,
         help="編集間隔（秒、既定: 60）。承認済みモードでは 5 秒以上",
     )
+    parser.add_argument("--link", action="store_true",
+                        help="リンク先だけを置換する（種別C: [[旧名]]→[[新名]] のリンク修正用）")
     parser.add_argument("--approved", action="store_true",
                         help="Bot フラグ承認済みアカウントで動かす場合のみ付ける")
     parser.add_argument("--write", action="store_true",
@@ -106,7 +108,10 @@ def main() -> int:
             skipped += 1
             continue
         before = page.text
-        after, count = apply_replace(before, args.old, args.new)
+        if args.link:
+            after, count = replace_link_target(before, args.old, args.new)
+        else:
+            after, count = apply_replace(before, args.old, args.new)
         if count == 0:
             print(f"- {title}: 置換対象なし")
             skipped += 1
