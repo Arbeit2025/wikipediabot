@@ -6,9 +6,8 @@ family = 'wikipedia'   # 対象ファミリー
 mylang = 'ja'          # 対象言語（日本語版）
 
 # Bot 専用アカウント名（通常利用のアカウントとは分けること）
-# この Bot の実際のアカウントは Whitebear＿bot。
-# 注意： "＿" は半角 "_" ではなく全角 "＿" (U+FF3F) なので、コピペで正確に入れること。
-usernames['wikipedia']['ja'] = 'Whitebear＿bot'
+# アカウント名に全角文字などが含まれる場合は、手で打たずコピペで正確に入れること。
+usernames['wikipedia']['ja'] = 'YourBotName'
 
 # BotPasswords の保存先
 password_file = "user-password.py"
