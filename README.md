@@ -30,9 +30,28 @@
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+Windows（コマンドプロンプト）の場合はこちら。`source` や `cp` は cmd では使えません。
+
+```bat
+python -m venv .venv
+.venv\Scripts\activate.bat
+pip install -r requirements.txt
+```
+
+#### Windows + Python 3.14 で mwparserfromhell のビルドに失敗する場合
+
+`Microsoft Visual C++ 14.0 or greater is required` と出るときは、C 拡張なし（純 Python 版）で入れるのが一番簡単です。機能は同じで、解析が少し遅くなるだけです（Build Tools を入れる必要はありません）。
+
+```bat
+set WITH_EXTENSION=0
+pip install -r requirements.txt
+```
+
+あるいは Python 3.12 / 3.13 を使うと、ビルド済み wheel がそのまま入ります。
 
 ### Bot アカウントと認証（BotPasswords）
 
@@ -44,6 +63,13 @@ pip install -r requirements.txt
 cp user-config.py.example user-config.py
 cp user-password.py.example user-password.py
 # 2つのファイルの中の Bot アカウント名などを自分のものに書き換える
+```
+
+Windows（cmd）では `cp` の代わりに `copy` を使います。
+
+```bat
+copy user-config.py.example user-config.py
+copy user-password.py.example user-password.py
 ```
 
 `user-password.py` の中身はパスワードそのものです。絶対にコミットしないでください。
