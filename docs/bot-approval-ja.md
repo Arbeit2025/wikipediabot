@@ -6,7 +6,8 @@
 - 利用者ページ：作成済み（「このアカウントはbotです。操作者：運用者」と明記）
 - グループ：`user` のみ。**Bot フラグは未付与**
 - 編集回数：1回（利用者ページの作成のみ）
-- BotPasswords：名前 `your-botpassword-name` で発行済み（と運用者から申告あり。パスワード自体はこのリポジトリに置かない）
+- BotPasswords：名前は `your-botpassword-name`（当時のパスワードファイルの実物で判明。ログイン名は `YourBotName@your-botpassword-name`）
+- ログイン確認：**2026-10-29 に運用者の Windows PC で成功**（`bot/check_site.py` で `logged in as: YourBotName`、読み取りのみ）
 
 つまり残っているのは、作業内容を決めて使用申請を出し、仮運用を行う段階です。
 
