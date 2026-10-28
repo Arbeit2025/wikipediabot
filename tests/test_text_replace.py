@@ -2,7 +2,7 @@
 
 import unittest
 
-from bot.text_replace import apply_replace, make_preview
+from bot.text_replace import apply_replace, make_preview, replace_link_target
 
 
 class TestApplyReplace(unittest.TestCase):
@@ -24,6 +24,33 @@ class TestApplyReplace(unittest.TestCase):
         after, count = apply_replace("aXbXc", "X", "")
         self.assertEqual(after, "abc")
         self.assertEqual(count, 2)
+
+
+class TestReplaceLinkTarget(unittest.TestCase):
+    def test_plain_link(self):
+        after, count = replace_link_target("[[旧名]]へのリンク", "旧名", "新名")
+        self.assertEqual(after, "[[新名]]へのリンク")
+        self.assertEqual(count, 1)
+
+    def test_piped_link_keeps_display_text(self):
+        after, count = replace_link_target("[[旧名|表示名]]", "旧名", "新名")
+        self.assertEqual(after, "[[新名|表示名]]")
+        self.assertEqual(count, 1)
+
+    def test_section_link_keeps_section(self):
+        after, count = replace_link_target("[[旧名#歴史]]と[[旧名#歴史|あの節]]", "旧名", "新名")
+        self.assertEqual(after, "[[新名#歴史]]と[[新名#歴史|あの節]]")
+        self.assertEqual(count, 2)
+
+    def test_plain_text_is_not_replaced(self):
+        after, count = replace_link_target("本文中の旧名という文字列", "旧名", "新名")
+        self.assertEqual(after, "本文中の旧名という文字列")
+        self.assertEqual(count, 0)
+
+    def test_similar_page_names_are_not_replaced(self):
+        after, count = replace_link_target("[[旧名2]]と[[新・旧名]]", "旧名", "新名")
+        self.assertEqual(after, "[[旧名2]]と[[新・旧名]]")
+        self.assertEqual(count, 0)
 
 
 class TestMakePreview(unittest.TestCase):
